@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="Machine,Learning,Continuous,Pareto,Multi-Task,MIT">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Emoji CSS -->
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- My JS -->
+    <script src="js/script.js"></script>
+    <script src="js/load-mathjax.js" async></script>
+
+    <title>Efficient Continuous Pareto Exploration in Multi-Task Learning</title>
+    </head>
+    <body>
+      <div class="container-fluid">
+
+        <!-- navigation -->
+        <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
+          <!-- Navbar content -->
+          <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="data/paper.pdf">Paper</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="data/supp.pdf">Appendix</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://arxiv.org/abs/2006.16434">arXiv</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://github.com/mit-gfx/ContinuousParetoMTL">Code</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://icml.cc/virtual/2020/poster/5856">Video</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="data/slides.pdf">Slides</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#bibtex">BibTex</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+
+        <!-- title -->
+        <div class="title-wrapper">
+          <div class="title">
+            Efficient Continuous Pareto Exploration in Multi-Task Learning
+          </div>
+          <div class="authors">
+            <a href="https://pingchuan.ma/">Pingchuan Ma</a><sup>*</sup>,
+            <a href="https://people.csail.mit.edu/taodu/">Tao Du</a><sup>*</sup>,
+            and
+            <a href="http://people.csail.mit.edu/wojciech/">Wojciech Matusik</a>
+          </div>
+          <div class="affiliation">MIT CSAIL</div>
+        </div>
+
+
+        <!-- figure -->
+        <div class="sec-wrapper img-wrapper">
+          <img src="./images/figure1.png" alt="[Overview]" style="max-width: 800px;">
+          <div class="section-item" style="text-align: left;">
+            <i>Figure 1.</i>
+            Comparisons of different exploration directions at a Pareto optimal solution ${\color{Red} \mathbf{x}^*}$.<br>
+            <abbr title="left"><i class="em em-arrow_left" aria-role="presentation" aria-label="LEFTWARDS BLACK ARROW"></i></abbr> The analytic Pareto set (the cylindrical surface) of ZDT2-variant, the gradients ${\color{NavyBlue} \nabla f_1(\mathbf{x}^*)}$ and ${\color{OliveGreen} \nabla f_2(\mathbf{x}^*)}$, and our directions ${\color{BurntOrange} \{\mathbf{v}_i\}}$.<br>
+            <abbr title="middle"><i class="em em-left_right_arrow" aria-role="presentation" aria-label="LEFT RIGHT ARROW"></i></abbr> A top-down view to show ours are almost tangent to the Pareto set.<br>
+            <abbr title="right"><i class="em em-arrow_right" aria-role="presentation" aria-label="BLACK RIGHTWARDS ARROW"></i></abbr> Plots of $\mathbf{f}(\mathbf{x}^*+s\mathbf{d})$ where $s\in[-0.1,0.1]$ and $\mathbf{d}$ is ${\color{NavyBlue} \nabla f_1(\mathbf{x}^*)}$, ${\color{OliveGreen} \nabla f_2(\mathbf{x}^*)}$, and our directions ${\color{BurntOrange} \{\mathbf{v}_i\}}$.
+          </div>
+        </div>
+
+
+        <!-- abstract -->
+        <div class="sec-wrapper">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Abstract</div>
+            </div>
+          </div>
+          <div class="row align-items-center section-item">
+            Tasks in multi-task learning often correlate, conflict, or even compete with each other.
+            As a result, a single solution that is optimal for all tasks rarely exists.
+            Recent papers introduced the concept of Pareto optimality to this field and directly cast multi-task learning as multi-objective optimization problems, but solutions returned by existing methods are typically finite, sparse, and discrete.
+            We present a novel, efficient method that generates locally continuous Pareto sets and Pareto fronts, which opens up the possibility of continuous analysis of Pareto optimal solutions in machine learning problems.
+            We scale up theoretical results in multi-objective optimization to modern machine learning problems by proposing a sample-based sparse linear system, for which standard Hessian-free solvers in machine learning can be applied.
+            We compare our method to the state-of-the-art algorithms and demonstrate its usage of analyzing local Pareto sets on various multi-task classification and regression problems.
+            The experimental results confirm that our algorithm reveals the primary directions in local Pareto sets for trade-off balancing, finds more solutions with different trade-offs efficiently, and scales well to tasks with millions of parameters.
+          </div>
+        </div>
+
+      <!-- paper -->
+      <div class="sec-wrapper pub-wrapper">
+        <div class="row">
+          <div class="col col-wrapper">
+            <div class="section-title">Paper</div>
+          </div>
+        </div>
+        <div class="row align-items-center section-item"">
+          <div class="col col-wrapper">
+            <div class="title">Efficient Continuous Pareto Exploration in Multi-Task Learning</div>
+            <div class="authors">
+              <a href="https://pingchuan.ma/">Pingchuan Ma</a><sup>*</sup>,
+              <a href="https://people.csail.mit.edu/taodu/">Tao Du</a><sup>*</sup>,
+              and
+              <a href="http://people.csail.mit.edu/wojciech/">Wojciech Matusik</a>
+            </div>
+            <div>International Conference on Machine Learning (<abbr>ICML</abbr>), 2020</div>
+            <a href="data/paper.pdf">[Paper]</a>
+            <a href="data/supp.pdf">[Appendix]</a>
+            <a href="https://arxiv.org/abs/2006.16434"">[arXiv]</a>
+            <a href="https://github.com/mit-gfx/ContinuousParetoMTL">[Code]</a>
+            <a href="https://icml.cc/virtual/2020/poster/5856">[Video]</a>
+            <a href="data/slides.pdf">[Slides]</a>
+            <div class="row">
+              <span class="github">
+                <a class="github-button" href="https://github.com/mit-gfx/ContinuousParetoMTL" data-icon="octicon-star" data-show-count="true" aria-label="Star mit-gfx/ContinuousParetoMTL on GitHub">Star</a>
+              </span>
+              <a href="https://colab.research.google.com/github/mit-gfx/ContinuousParetoMTL/blob/colab">
+                <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+              </a>
+            </div>
+            <pre id="bibtex"><code>@inproceedings{ma2020continuous,
+    title={Efficient Continuous Pareto Exploration in Multi-Task Learning},
+    author={Ma, Pingchuan and Du, Tao and Matusik, Wojciech},
+    booktitle={Proceedings of the 37th International Conference on Machine Learning},
+    year={2020}
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- results -->
+      <div class="sec-wrapper">
+        <div class="row">
+          <div class="col col-wrapper">
+            <div class="section-title">Results</div>
+          </div>
+        </div>
+        <div class="img-wrapper">
+          <img src="./images/figure2.png" alt="[Pareto Expansion]" style="max-width: 500px;">
+          <div class="section-item" style="text-align: center;">
+            <i>Figure 2.</i>
+            Pareto Expansion on
+            MultiMNIST and its variants <abbr title="top row"><i class="em em-arrow_up" aria-role="presentation" aria-label="UPWARDS BLACK ARROW"></i></abbr>,
+            UCI Census-Income <abbr title="bottom left"><i class="em em-arrow_lower_left" aria-role="presentation" aria-label="SOUTH WEST ARROW"></i></abbr>,
+            and UTKFace <abbr title="bottom right"><i class="em em-arrow_lower_right" aria-role="presentation" aria-label="SOUTH EAST ARROW"></i></abbr>.
+          </div>
+        </div>
+        <div class="img-wrapper">
+          <img src="./images/figure3.png" alt="[Continuous Parametrization]" style="max-width: 800px;">
+          <div class="section-item" style="text-align: center;">
+            <i>Figure 3.</i>
+            Continuous parametrization on UCI Census-Income.
+          </div>
+        </div>
+      </div>
+
+
+      <!-- related projects -->
+      <div class="sec-wrapper pub-wrapper">
+        <div class="row">
+          <div class="col col-wrapper">
+            <div class="section-title">Related Projects</div>
+          </div>
+        </div>
+
+        <div class="row align-items-center section-item">
+          <div class="col col-wrapper">
+            <div class="title">
+              <a href="https://people.csail.mit.edu/jiex/papers/PGMORL/">
+                Prediction-guided Multi-Objective Reinforcement Learning for Continuous Robot Control
+              </a>
+            </div>
+            <div class="authors">
+              <a href="https://people.csail.mit.edu/jiex/">Jie Xu</a>,
+              <a href="https://www.yunshengtian.com/">Yunsheng Tian</a>,
+              <a href="https://pingchuan.ma/">Pingchuan Ma</a>,
+              <a href="http://danielarus.csail.mit.edu/">Daniela Rus</a>,
+              <a href="http://faculty.cs.tamu.edu/sueda/">Shinjiro Sueda</a>,
+              and
+              <a href="http://people.csail.mit.edu/wojciech/">Wojciech Matusik</a>
+            </div>
+            <div>International Conference on Machine Learning (<abbr>ICML</abbr>), 2020</div>
+            <a href="https://people.csail.mit.edu/jiex/papers/PGMORL/">[Project Page]</a>
+            <a href="https://people.csail.mit.edu/jiex/papers/PGMORL/paper.pdf">[Paper]</a>
+            <a href="https://people.csail.mit.edu/jiex/papers/PGMORL/supp.pdf">[Appendix]</a>
+            <a href="https://github.com/mit-gfx/PGMORL">[Code]</a>
+            <a href="https://people.csail.mit.edu/jiex/papers/PGMORL/video.mp4">[Video]</a>
+          </div>
+        </div>
+
+        <div class="row align-items-center section-item">
+          <div class="col col-wrapper">
+            <div class="title">
+              <a href="https://homes.cs.washington.edu/~adriana/tradeoffs/">
+                Interactive Exploration of Design Trade-Offs
+              </a>
+            </div>
+            <div class="authors">
+              <a href="http://people.csail.mit.edu/aschulz/">Adriana Schulz</a><sup>*</sup>,
+              Harrison Wang<sup>*</sup>,
+              <a href="http://www.cs.columbia.edu/~eitan/">Eitan Grinspun</a>,
+              <a href="http://people.csail.mit.edu/jsolomon/">Justin Solomon</a>,
+              and
+              <a href="http://people.csail.mit.edu/wojciech/">Wojciech Matusik</a>
+            </div>
+            <div>ACM Transactions on Graphics, Proceedings of ACM <abbr>SIGGRAPH</abbr>, 2018</div>
+            <a href="https://homes.cs.washington.edu/~adriana/tradeoffs/">[Project Page]</a>
+            <a href="https://homes.cs.washington.edu/~adriana/tradeoffs/aschulz2018.pdf">[Paper]</a>
+            <a href="https://youtu.be/PHsn4Ffbh7w">[Video]</a>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="footer">
+        <div class="text-muted">Copyright &copy; <span id="year"></span> Massachusetts Institute of Technology. All Rights Reserved.</div>
+        <script>var d=new Date();document.getElementById('year').innerHTML=d.getFullYear();</script>
+      </footer>
+
+    </div>
+  </body>
+  <script>
+    var scroll = new SmoothScroll('a[href*="#"]', {speed: 700, ignore: '[smooth-scroll-ignore]'});
+  </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</html>
